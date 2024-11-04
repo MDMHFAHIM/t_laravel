@@ -73,7 +73,7 @@ Route::controller(HotelController::class)->group(function(){
 
 Route::controller(Hotel_BookingController::class)->group(function(){
     Route::get('hotel_booking','index');
-    Route::get('hotel_booking/{id}','show');
+    Route::get('hotel_booking/{hotel_booking}','show');
     Route::post('hotel_booking/edit/{hotel_booking}','update');
     Route::delete('hotel_booking/{hotel_booking}','destroy');
     Route::post('hotel_booking/create','store');

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\HotelBooking;
+use App\Models\Hotel_Booking;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\BaseController;
 
@@ -13,8 +13,8 @@ class Hotel_BookingController extends BaseController
      */
     public function index()
     {
-        $data=HotelBooking::with('customer','hotel','roomtype')->get();
-        return $this->sendResponse($data,"HotelBooking list");
+        $data=Hotel_Booking::with('customer','hotel','roomtype')->get();
+        return $this->sendResponse($data,"Hotel_Booking list");
     }
 
 
@@ -38,18 +38,16 @@ class Hotel_BookingController extends BaseController
         $input['image']=implode(',',$files); */
         /* /for files */
 
-        $data=HotelBooking::create($input);
-        return $this->sendResponse($data,"HotelBooking created successfully");
+        $data=Hotel_Booking::create($input);
+        return $this->sendResponse($data,"Hotel_Booking created successfully");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show( $id)
+    public function show(Hotel_Booking $hotel_booking)
     {
-        return $id;
-        return $hotel_booking;
-        return $this->sendResponse($hotel_booking,"HotelBooking data");
+        return $this->sendResponse($hotel_booking,"Hotel_Booking data");
     }
 
 
@@ -74,16 +72,16 @@ class Hotel_BookingController extends BaseController
         unset($input['files']); */
 
         /* /for files */
-        $hotel_booking=HotelBooking::where('id',$id)->update($input);
-        return $this->sendResponse($hotel_booking,"HotelBooking updated successfully");
+        $hotel_booking=Hotel_Booking::where('id',$id)->update($input);
+        return $this->sendResponse($hotel_booking,"Hotel_Booking updated successfully");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(HotelBooking $hotel_booking)
+    public function destroy(Hotel_Booking $hotel_booking)
     {
         $hotel_booking=$hotel_booking->delete();
-        return $this->sendResponse($hotel_booking,"HotelBooking deleted successfully");
+        return $this->sendResponse($hotel_booking,"Hotel_Booking deleted successfully");
     }
 }
