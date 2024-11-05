@@ -53,4 +53,19 @@ class CustomerController extends BaseController
         $package=$package->delete();
         return $this->sendResponse($customer,"Customer deleted successfully");
     }
+
+    public function _login(Request $r)
+    {
+        $data=Customer::where('name',$r->name)
+                ->where('email',$r->email)
+                ->where('password',$r->password)
+                ->first()?->toArray();
+        if($data){
+            $d['token']=$data['id'];
+            $d['data']=$data;
+            return $this->sendResponse($d,"User login successfully");
+        }else{
+            return $this->sendError(['error'=>'email or password is not correct'],"Unauthorized",400);
+        }
+    }
 }
