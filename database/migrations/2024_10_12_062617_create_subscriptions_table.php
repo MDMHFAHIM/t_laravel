@@ -14,9 +14,8 @@ return new class extends Migration
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
             $table->string('image');
-            $table->string('name');
+            $table->string('customer_id');
             $table->string('email');
-            $table->string('zone_id');
             $table->string('address');
             $table->string('contact');
             $table->string('alt_contact');

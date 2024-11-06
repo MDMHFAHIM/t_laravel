@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Subscription extends Model
 {
     use HasFactory;
-    protected $fillable=['name', 'email', 'zone_id', 'address', 'contact', 'alt_contact'];
+    protected $fillable=['image','customer_id', 'email','address', 'contact', 'alt_contact'];
 
-    public function zone()
+    public function customer()
     {
-        return $this->belongsTo(zone::class);
+        return $this->belongsTo(customer::class);
     }
 
 }

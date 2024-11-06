@@ -13,7 +13,7 @@ class SubscriptionController extends BaseController
      */
     public function index()
     {
-        $data=Subscription::with('zone')->get();
+        $data=Subscription::with('customer')->get();
         return $this->sendResponse($data,"Subscription list");
     }
 

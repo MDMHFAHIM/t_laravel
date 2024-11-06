@@ -11,9 +11,9 @@ class PackageController extends BaseController
     /**
      * Display a listing of the resource.
      */
-    public function index()
+     public function index()
     {
-        $data=Package::get();
+         $data=Package::get();
         return $this->sendResponse($data,"Package list");
     }
 
@@ -23,7 +23,22 @@ class PackageController extends BaseController
      */
     public function store(Request $request)
     {
-        $data=Package::create($request->all());
+        $input=$request->all();
+        /* for files */
+        $files=[];
+        if($request->hasFile('files')){
+            foreach($request->file('files') as $f){
+                $imagename=time().rand(1111,9999).".".$f->extension();
+                $imagePath=public_path().'/package';
+                if($f->move($imagePath,$imagename)){
+                    array_push($files,$imagename);
+                }
+            }
+        }
+        $input['image']=implode(',',$files);
+        /* /for files */
+
+        $data=Package::create($input);
         return $this->sendResponse($data,"Package created successfully");
     }
 
@@ -41,7 +56,23 @@ class PackageController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        $package=Package::where('id',$id)->update($request->all());
+        $input=$request->all();
+        /* for files */
+        $files=[];
+        if($request->hasFile('files')){
+            foreach($request->file('files') as $f){
+                $imagename=time().rand(1111,9999).".".$f->extension();
+                $imagePath=public_path().'/package';
+                if($f->move($imagePath,$imagename)){
+                    array_push($files,$imagename);
+                }
+            }
+            $input['image']=implode(',',$files);
+        }
+        unset($input['files']);
+
+        /* /for files */
+        $package=Package::where('id',$id)->update($input);
         return $this->sendResponse($package,"Package updated successfully");
     }
 
