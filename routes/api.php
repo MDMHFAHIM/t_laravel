@@ -61,6 +61,7 @@ Route::controller(CustomerController::class)->group(function(){
     Route::post('customer/edit/{customer}','update');
     Route::delete('customer/{customer}','destroy');
     Route::post('customer/create','store');
+    Route::post('customer/login','_login');
 });
 
 Route::controller(HotelController::class)->group(function(){

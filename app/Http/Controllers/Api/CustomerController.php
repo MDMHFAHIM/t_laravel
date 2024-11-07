@@ -56,8 +56,7 @@ class CustomerController extends BaseController
 
     public function _login(Request $r)
     {
-        $data=Customer::where('name',$r->name)
-                ->where('email',$r->email)
+        $data=Customer::where('email',$r->email)
                 ->where('password',$r->password)
                 ->first()?->toArray();
         if($data){

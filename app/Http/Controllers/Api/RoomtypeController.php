@@ -11,9 +11,13 @@ class RoomtypeController extends BaseController
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data=Roomtype::with('hotel')->get();
+        $data=Roomtype::with('hotel');
+        if($request->hotel_id){
+            $data=$data->where('hotel_id',$request->hotel_id);
+        }
+        $data=$data->get();
         return $this->sendResponse($data,"Roomtype list");
     }
 
