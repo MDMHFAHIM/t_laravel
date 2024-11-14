@@ -9,7 +9,7 @@ class flightprice extends Model
 {
     use HasFactory;
 
-    protected $fillable=['flight_id','class','airfare',];
+    protected $fillable=['flight_id','class', 'trip_type','airfare',];
 
     public function flight ()
     {

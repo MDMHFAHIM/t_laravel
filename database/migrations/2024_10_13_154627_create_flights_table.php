@@ -16,13 +16,13 @@ return new class extends Migration
             $table->string('airline_id');
             $table->string('image');
             $table->string('class');
-            $table->string('trip_type');
-            $table->string('departure_place');
-            $table->string('arrival_place');
+            $table->string('flightprice_id');
+            $table->string('zone_id');
             $table->string('departure_time');
             $table->string('transit_time');
             $table->string('is_complementary_food');
             $table->string('baggage_allowance');
+            $table->string('fare');
             $table->timestamps();
         });
     }

@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\HotelController;
 use App\Http\Controllers\Api\Hotel_BookingController;
 use App\Http\Controllers\Api\FlightController;
+use App\Http\Controllers\Api\FlightPriceController;
 use App\Http\Controllers\Api\Flight_BookingController;
 use App\Http\Controllers\Api\TransportController;
 use App\Http\Controllers\Api\SubscriptionController;
@@ -86,6 +87,14 @@ Route::controller(FlightController::class)->group(function(){
     Route::post('flight/edit/{flight}','update');
     Route::delete('flight/{flight}','destroy');
     Route::post('flight/create','store');
+});
+
+Route::controller(FlightPriceController::class)->group(function(){
+    Route::get('flightprice','index');
+    Route::get('flightprice/{flightprice}','show');
+    Route::post('flightprice/edit/{flightprice}','update');
+    Route::delete('flightprice/{flightprice}','destroy');
+    Route::post('flightprice/create','store');
 });
 
 Route::controller(Flight_BookingController::class)->group(function(){

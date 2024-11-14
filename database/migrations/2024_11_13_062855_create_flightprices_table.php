@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->flight_id();
             $table->class();
+            $table->trip_type();
             $table->airfare();
             $table->timestamps();
         });

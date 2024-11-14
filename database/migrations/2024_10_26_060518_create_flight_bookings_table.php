@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('flight_bookings', function (Blueprint $table) {
             $table->id();
             $table->string('customer_id');
+            $table->string('zone_id');
             $table->string('flight_id');
             $table->string('number_of_seat');
             $table->string('check_in_date');
