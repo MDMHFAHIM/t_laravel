@@ -11,9 +11,14 @@ class FlightController extends BaseController
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data=Flight::with('airline')->get();
+        $data=Flight::with('airline','departure','arrival');
+        if($request->departure_zone && $request->arrival_zone){
+            $data=$data->where('departure_zone',$request->departure_zone)
+                        ->where('arrival_zone',$request->arrival_zone);
+        }
+        $data=$data->get();
         return $this->sendResponse($data,"Flight list");
     }
 

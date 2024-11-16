@@ -13,7 +13,7 @@ class StateController extends BaseController
      */
     public function index()
     {
-        $data=State::get();
+        $data=State::with('country',)->get();
         return $this->sendResponse($data,"State list");
     }
 
@@ -23,7 +23,22 @@ class StateController extends BaseController
      */
     public function store(Request $request)
     {
-        $data=State::create($request->all());
+        $input=$request->all();
+        /* for files
+        $files=[];
+        if($request->hasFile('files')){
+            foreach($request->file('files') as $f){
+                $imagename=time().rand(1111,9999).".".$f->extension();
+                $imagePath=public_path().'/state';
+                if($f->move($imagePath,$imagename)){
+                    array_push($files,$imagename);
+                }
+            }
+        }
+        $input['image']=implode(',',$files); */
+        /* /for files */
+
+        $data=State::create($input);
         return $this->sendResponse($data,"State created successfully");
     }
 
@@ -41,7 +56,23 @@ class StateController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        $state=State::where('id',$id)->update($request->all());
+        $input=$request->all();
+        /* for files
+        $files=[];
+        if($request->hasFile('files')){
+            foreach($request->file('files') as $f){
+                $imagename=time().rand(1111,9999).".".$f->extension();
+                $imagePath=public_path().'/state';
+                if($f->move($imagePath,$imagename)){
+                    array_push($files,$imagename);
+                }
+            }
+            $input['image']=implode(',',$files);
+        }
+        unset($input['files']); */
+
+        /* /for files */
+        $state=State::where('id',$id)->update($input);
         return $this->sendResponse($state,"State updated successfully");
     }
 
@@ -50,7 +81,7 @@ class StateController extends BaseController
      */
     public function destroy(State $state)
     {
-        $package=$package->delete();
+        $state=$state->delete();
         return $this->sendResponse($state,"State deleted successfully");
     }
 }

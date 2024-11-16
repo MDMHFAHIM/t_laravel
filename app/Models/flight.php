@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class flight extends Model
 {
     use HasFactory;
-     protected $fillable=['airline_id', 'image','class','flightprice_id', 'zone_id','departure_time','arrival_time','transit_time','is_complementary_food','baggage_allowance'];
+     protected $fillable=['airline_id', 'image','class','flightprice_id', 'departure_zone','arrival_zone','departure_time','arrival_time','transit_time','is_complementary_food','baggage_allowance'];
 
     public function airline()
     {
@@ -20,9 +20,13 @@ class flight extends Model
         return $this->belongsTo(flightprice::class);
     }
 
-    public function zone()
+    public function departure()
     {
-        return $this->belongsTo(zone::class);
+        return $this->belongsTo(zone::class,'departure_zone');
+    }
+    public function arrival()
+    {
+        return $this->belongsTo(zone::class,'arrival_zone');
     }
 
 }

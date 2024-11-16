@@ -13,7 +13,7 @@ class ZoneController extends BaseController
      */
     public function index()
     {
-        $data=Zone::get();
+        $data=Zone::with('country','state',)->get();
         return $this->sendResponse($data,"Zone list");
     }
 
@@ -23,7 +23,22 @@ class ZoneController extends BaseController
      */
     public function store(Request $request)
     {
-        $data=Zone::create($request->all());
+        $input=$request->all();
+        /* for files
+        $files=[];
+        if($request->hasFile('files')){
+            foreach($request->file('files') as $f){
+                $imagename=time().rand(1111,9999).".".$f->extension();
+                $imagePath=public_path().'/zone';
+                if($f->move($imagePath,$imagename)){
+                    array_push($files,$imagename);
+                }
+            }
+        }
+        $input['image']=implode(',',$files); */
+        /* /for files */
+
+        $data=Zone::create($input);
         return $this->sendResponse($data,"Zone created successfully");
     }
 
@@ -41,7 +56,23 @@ class ZoneController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        $zone=Zone::where('id',$id)->update($request->all());
+        $input=$request->all();
+        /* for files
+        $files=[];
+        if($request->hasFile('files')){
+            foreach($request->file('files') as $f){
+                $imagename=time().rand(1111,9999).".".$f->extension();
+                $imagePath=public_path().'/zone';
+                if($f->move($imagePath,$imagename)){
+                    array_push($files,$imagename);
+                }
+            }
+            $input['image']=implode(',',$files);
+        }
+        unset($input['files']); */
+
+        /* /for files */
+        $zone=Zone::where('id',$id)->update($input);
         return $this->sendResponse($zone,"Zone updated successfully");
     }
 
@@ -50,7 +81,7 @@ class ZoneController extends BaseController
      */
     public function destroy(Zone $zone)
     {
-        $package=$package->delete();
+        $zone=$zone->delete();
         return $this->sendResponse($zone,"Zone deleted successfully");
     }
 }

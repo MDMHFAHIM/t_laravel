@@ -14,8 +14,8 @@ class FlightPriceController extends BaseController
     public function index(Request $request)
     {
         $data=Flightprice::with('flight');
-        if($request->hotel_id){
-            $data=$data->where('flight_id',$request->hotel_id);
+        if($request->flight_id){
+            $data=$data->where('flight_id',$request->flight_id);
         }
         $data=$data->get();
         return $this->sendResponse($data,"Flightprice list");
