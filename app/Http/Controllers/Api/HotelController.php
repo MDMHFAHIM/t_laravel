@@ -11,9 +11,13 @@ class HotelController extends BaseController
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data=Hotel::with('zone','catagory','roomtype')->get();
+        $data=Hotel::with('zone','catagory','roomtype');
+        if($request->zone_id){
+            $data=$data->where('zone_id',$request->zone_id);
+        }
+        $data=$data->get();
         return $this->sendResponse($data,"Hotel list");
     }
 
