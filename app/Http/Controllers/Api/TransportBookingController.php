@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Transport;
+use App\Models\Transport_Booking;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\BaseController;
 
-class TransportController extends BaseController
+class TransportBookingController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
-     public function index()
+    public function index()
     {
-         $data=Transport::get();
-        return $this->sendResponse($data,"Transport list");
+        $data=Transport_Booking::with('customer','transport')->get();
+        return $this->sendResponse($data,"Transport_Booking list");
     }
 
 
@@ -24,30 +24,30 @@ class TransportController extends BaseController
     public function store(Request $request)
     {
         $input=$request->all();
-        /* for files */
+        /* for files
         $files=[];
         if($request->hasFile('files')){
             foreach($request->file('files') as $f){
                 $imagename=time().rand(1111,9999).".".$f->extension();
-                $imagePath=public_path().'/transport';
+                $imagePath=public_path().'/transport_booking';
                 if($f->move($imagePath,$imagename)){
                     array_push($files,$imagename);
                 }
             }
         }
-        $input['image']=implode(',',$files);
+        $input['image']=implode(',',$files); */
         /* /for files */
 
-        $data=Transport::create($input);
-        return $this->sendResponse($data,"Transport created successfully");
+        $data=Transport_Booking::create($input);
+        return $this->sendResponse($data,"Transport_Booking created successfully");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Transport $transport)
+    public function show(Transport_Booking $transport_booking)
     {
-        return $this->sendResponse($transport,"Transport data");
+        return $this->sendResponse($transport_booking,"Transport_Booking data");
     }
 
 
@@ -57,31 +57,31 @@ class TransportController extends BaseController
     public function update(Request $request, $id)
     {
         $input=$request->all();
-        /* for files */
+        /* for files
         $files=[];
         if($request->hasFile('files')){
             foreach($request->file('files') as $f){
                 $imagename=time().rand(1111,9999).".".$f->extension();
-                $imagePath=public_path().'/transport';
+                $imagePath=public_path().'/transport_booking';
                 if($f->move($imagePath,$imagename)){
                     array_push($files,$imagename);
                 }
             }
             $input['image']=implode(',',$files);
         }
-        unset($input['files']);
+        unset($input['files']); */
 
         /* /for files */
-        $transport=Transport::where('id',$id)->update($input);
-        return $this->sendResponse($transport,"Transport updated successfully");
+        $transport_booking=Transport_Booking::where('id',$id)->update($input);
+        return $this->sendResponse($transport_booking,"Transport_Booking updated successfully");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Transport $transport)
+    public function destroy(Transport_Booking $transport_booking)
     {
-        $transport=$transport->delete();
-        return $this->sendResponse($transport,"Transport deleted successfully");
+        $transport_booking=$transport_booking->delete();
+        return $this->sendResponse($transport_booking,"Transport_Booking deleted successfully");
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('image');
             $table->string('duration');
-            $table->string('number_of_guest');
+            $table->string('price');
             $table->string('location');
             $table->timestamps();
         });

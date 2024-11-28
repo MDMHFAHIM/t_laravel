@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('transports', function (Blueprint $table) {
             $table->id();
-            $table->string('country');
-            $table->string('state');
-            $table->string('schedule');
+            $table->string('vehicle');
+             $table->string('image');
             $table->string('departure_time');
             $table->string('arrival_time');
-            $table->string('vehicle_id');
-            $table->string('fare');
+            $table->string('location');
+            $table->string('price');
             $table->timestamps();
         });
     }

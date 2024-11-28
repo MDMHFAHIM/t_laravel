@@ -113,6 +113,14 @@ Route::controller(TransportController::class)->group(function(){
     Route::post('transport/create','store');
 });
 
+Route::controller(Transport_BookingController::class)->group(function(){
+    Route::get('transport_booking','index');
+    Route::get('transport_booking/{transport_booking}','show');
+    Route::post('transport_booking/edit/{transport_booking}','update');
+    Route::delete('transport_booking/{transport_booking}','destroy');
+    Route::post('transport_booking/create','store');
+});
+
 Route::controller(SubscriptionController::class)->group(function(){
     Route::get('subscription','index');
     Route::get('subscription/{subscription}','show');
