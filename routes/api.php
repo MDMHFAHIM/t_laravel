@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\FlightController;
 use App\Http\Controllers\Api\FlightPriceController;
 use App\Http\Controllers\Api\Flight_BookingController;
 use App\Http\Controllers\Api\TransportController;
+use App\Http\Controllers\Api\Transport_BookingController;
 use App\Http\Controllers\Api\SubscriptionController;
 use App\Http\Controllers\Api\CatagoryController;
 use App\Http\Controllers\Api\CountryController;

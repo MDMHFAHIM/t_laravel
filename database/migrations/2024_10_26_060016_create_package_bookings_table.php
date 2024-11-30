@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('number_of_guest_adult');
             $table->string('number_of_guest_child');
             $table->string('check_in_date');
-            $table->string('check_out_date');
             $table->string('fare');
 
             $table->timestamps();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Package_Booking;
+use App\Models\Package;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\BaseController;
 
@@ -23,22 +24,18 @@ class Package_BookingController extends BaseController
      */
     public function store(Request $request)
     {
-        $input=$request->all();
-        /* for files
-        $files=[];
-        if($request->hasFile('files')){
-            foreach($request->file('files') as $f){
-                $imagename=time().rand(1111,9999).".".$f->extension();
-                $imagePath=public_path().'/package_booking';
-                if($f->move($imagePath,$imagename)){
-                    array_push($files,$imagename);
-                }
-            }
-        }
-        $input['image']=implode(',',$files); */
-        /* /for files */
+        $package=Package::find($request->package_id);
 
-        $data=Package_Booking::create($input);
+        $pack['customer_id']=$request->customer_id;
+        $pack['package_id']=$request->package_id;
+        $pack['person']=$request->person;
+        $pack['number_of_guest_adult']=$request->number_of_guest_adult;
+        $pack['number_of_guest_child']=$request->number_of_guest_child;
+        $pack['check_in_date']=$request->check_in_date;
+        $pack['duration']=$package->duration;
+        $pack['fare']=$request->total;
+
+        $data=Package_Booking::create($pack);
         return $this->sendResponse($data,"Package_Booking created successfully");
     }
 
