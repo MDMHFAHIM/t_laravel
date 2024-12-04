@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('person');
             $table->string('check_in_date');
             $table->string('check_out_date');
-            $table->string('total_amount');
+            $table->string('fare');
+            $table->string('total');
 
             $table->timestamps();
         });

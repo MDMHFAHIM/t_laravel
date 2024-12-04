@@ -29,6 +29,8 @@ class Transport_BookingController extends BaseController
         $pack['person']=$request->person;
         $pack['check_in_date']=$request->check_in_date;
         $pack['check_out_date']=$request->check_out_date;
+        $pack['fare']=$request->fare;
+        $pack['total']=$request->total;
 
         $data=TransportBooking::create($pack);
         return $this->sendResponse($data,"Transport_Booking created successfully");

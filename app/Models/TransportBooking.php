@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TransportBooking extends Model
 {
    use HasFactory;
-     protected $fillable=['customer_id','transport_id', 'person', 'check_in_date','check_out_date','total_amount'];
+     protected $fillable=['customer_id','transport_id', 'person', 'check_in_date','check_out_date','fare','total'];
 
     public function customer()
     {
